@@ -28,6 +28,9 @@
     border-bottom: solid;
     border-bottom-width: 1px;
 }
-.contentCard{
-
+.fatherForm{
+    padding: 10px 0px 0px 25px;
+}
+form input{
+    margin: 3px;
 }

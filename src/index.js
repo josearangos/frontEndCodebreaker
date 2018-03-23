@@ -24,10 +24,46 @@ class Card extends React.Component {
         </div>
       )
     }
-  }
+}
 
-  class Ideas extends React.Component {
-    ideas = [/*{title: "aa",description:"bbb"}*/];
+class Newidea extends React.Component {
+    uri="";
+    constructor() {
+        super()
+    }
+
+    render() {
+        return (
+        <div className="contentCenter">
+            <Container>
+                <Row>
+                    <Col>
+                    <h2>Muestranos tu idea</h2>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                    <form action={this.uri} method="POST">
+                        <input type="text" name="title" placeholder="Ingrese el titulo" />
+                        <input type="text" name="description" placeholder="Descripcion" />
+                        <input type="submit" />
+                    </form>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+      )
+    }
+}
+
+class Ideas extends React.Component {
+    ideas = [{title: "aa",content:"bbb"},
+     {title: "aa",content:"bbb"},
+      {title: "aa",content:"bbb"}, 
+      {title: "aa",content:"bbb"},
+      {title: "aa",content:"bbb"},
+      {title: "aa",content:"bbb"}, 
+      {title: "aa",content:"bbb"}];
     constructor(){
         super();
     }
@@ -50,6 +86,9 @@ class Card extends React.Component {
         return(
            
             <div>
+                <div className="fatherForm">
+                    <Newidea />
+                </div>
                 <Container>
                 <Row>
                         <Col>
@@ -58,21 +97,22 @@ class Card extends React.Component {
                             </div>
                         </Col>
                     </Row>
+                    {this.ideas.map(i => 
                     <Row>
                         <Col>
-                            <div className="contentCenter">
-                                {this.ideas.map(i => <Card idea={i}/>)}
-                            </div>
+                        <div className="contentCenter">
+                            <Card idea={i}/>
+                        </div>
                         </Col>
                     </Row>
-                    
+                    )}
                 </Container>
             </div>
             
 
         );
     }
-  }
+}
 
 ReactDOM.render(
     <Ideas />,
