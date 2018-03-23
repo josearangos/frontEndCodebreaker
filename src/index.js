@@ -7,9 +7,7 @@ class Card extends React.Component {
     constructor(props) {
         super(props)
         this.idea=props.idea;
-        console.log("iiiiiiiiiii");
         console.log(this.idea);
-        console.log("iiiiiiiii");
     }
 
     render() {
@@ -57,17 +55,14 @@ class Newidea extends React.Component {
 }
 
 class Ideas extends React.Component {
-    ideas = [/*{title: "aa",content:"bbb"},
-     {title: "aa",content:"bbb"},
-      {title: "aa",content:"bbb"}, 
-      {title: "aa",content:"bbb"},
-      {title: "aa",content:"bbb"},
-      {title: "aa",content:"bbb"}, 
-{title: "aa",content:"bbb"}*/];
+    ideas = [{title: "educación",description:"app para compartir ejercicios de fisica resultos"},
+     {title: "agrotech",description:"drones para fumigar cultivos"},
+      {title: "tursitapp",description:"App para contratar guías turisticos"}  
+     ]
     constructor(){
         super();
     }
-    componentWillMount() {
+    componentDidMount() {
         const uri = "http://127.0.0.1:8000/api/v1/idea/";
         fetch(uri)
           .then(response => {                            
@@ -77,11 +72,12 @@ class Ideas extends React.Component {
           .then(res => {
             this.ideas = res;          
             console.log(this.ideas);
+            this.forceUpdate();
         })
+        
       }
 
     render() {
-        
         return(
             <div>
                 <div className="fatherForm">
