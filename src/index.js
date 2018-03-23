@@ -74,23 +74,21 @@ class Ideas extends React.Component {
               console.log(response)
               return response.json();
           })
-          .then(empleados => {
-            this.ideas = empleados;          
+          .then(res => {
+            this.ideas = res;          
             console.log(this.ideas);
-
-          })
+        })
       }
 
     render() {
         
         return(
-           
             <div>
                 <div className="fatherForm">
                     <Newidea />
                 </div>
                 <Container>
-                <Row>
+                    <Row>
                         <Col>
                             <div className="contentCenter">
                                 <h1>¡Desarrolla una idea!</h1>
@@ -108,8 +106,6 @@ class Ideas extends React.Component {
                     )}
                 </Container>
             </div>
-            
-
         );
     }
 }
