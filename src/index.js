@@ -27,7 +27,7 @@ class Card extends React.Component {
 }
 
 class Newidea extends React.Component {
-    uri="";
+    uri="http://127.0.0.1:8000/api/v1/idea/";
     constructor() {
         super()
     }
@@ -57,18 +57,18 @@ class Newidea extends React.Component {
 }
 
 class Ideas extends React.Component {
-    ideas = [{title: "aa",content:"bbb"},
+    ideas = [/*{title: "aa",content:"bbb"},
      {title: "aa",content:"bbb"},
       {title: "aa",content:"bbb"}, 
       {title: "aa",content:"bbb"},
       {title: "aa",content:"bbb"},
       {title: "aa",content:"bbb"}, 
-      {title: "aa",content:"bbb"}];
+{title: "aa",content:"bbb"}*/];
     constructor(){
         super();
     }
     componentWillMount() {
-        const uri = "http://127.0.0.1:8000/api/v1/idea";
+        const uri = "http://127.0.0.1:8000/api/v1/idea/";
         fetch(uri)
           .then(response => {                            
               console.log(response)
