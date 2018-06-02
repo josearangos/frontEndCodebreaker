@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import request from "../node_modules/superagent/superagent";
 import Form1 from './Form1';
 import Form2 from './Form2';
 
@@ -9,38 +10,46 @@ class CodeBreaker extends Component {
     this.state = {respuesta: ""};
   }
   
-  adivinar(num){
+  adivinar(num, callback){
     const uri = "http://localhost:5000/api/codebreaker/try";
-    fetch(uri, {
-    method: 'post',
-    body: JSON.stringify(`{ "number": "${num}"}`)
-    }).then(response => {
-      console.log(response);
-      this.setState({respuesta: JSON.stringify(response)});
-    })
+    request.post(uri)
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .send({ number: num })
+      .end(function(err, res){
+        let response = JSON.parse(res.text);
+        callback(response.err, response.message);
+    });  
   }
 
-  clave(num){
+  clave(num, callback){
     const uri = "http://localhost:5000/api/codebreaker/secret";
-    fetch(uri, {
-    method: 'post',
-    body: JSON.stringify(`{ "number": "${num}"}`)
-    }).then(response => {   
-      this.setState({respuesta: JSON.stringify(response)});  
-    })
+    request.post(uri)
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .send({ number: num })
+      .end(function(err, res){
+        let response = JSON.parse(res.text);
+        callback(response.err, response.message);
+    });  
+
   }
 
 
   handleAdivinar(event) {
     event.preventDefault();
     let numero = event.target.numero.value; 
-    this.adivinar(numero);  
+    var afuera = this;
+    this.adivinar(numero, function(err, data){
+      afuera.setState({respuesta: data});
+    });  
   }
 
   handleClave(event) {
     event.preventDefault();
-    let numero = event.target.clave.value; 
-    this.clave(numero);   
+    let numero = event.target.clave.value;
+    var afuera = this;
+    this.clave(numero, function(err, data){
+      afuera.setState({respuesta: data});
+    });   
   }
 
   render() {
@@ -48,8 +57,8 @@ class CodeBreaker extends Component {
       <div className="CodeBreaker">
         <h2>Cristian Andres Marin - Jose Arango</h2>
         <div>
-          <Form1 adivinar={this.handleAdivinar.bind(this)} />
           <Form2 clave={this.handleClave.bind(this)} />
+          <Form1 adivinar={this.handleAdivinar.bind(this)} />
         </div>
         <span>Respuesta: {this.state.respuesta}</span>     
       </div>   

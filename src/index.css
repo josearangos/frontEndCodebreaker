@@ -34,3 +34,17 @@
 form input{
     margin: 3px;
 }
+h2 {
+    text-align: center;
+    color: #750000;
+    margin-bottom: 20px;
+}
+form{
+    width: max-content;
+    display: block;
+    margin: auto;
+}
+span{
+    text-align: center;
+    display: block;
+}
